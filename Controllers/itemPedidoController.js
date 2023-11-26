@@ -1,4 +1,4 @@
-const CarrinhoModel = require('../models/CarrinhoModel');
+const CarrinhoModel = require('../Models/CarrinhoModel');
 
 const adicionarItemAoCarrinho = async (req, res) => {
   const { camisa_id, quantidade, preco_unitario, cliente_id } = req.body;
