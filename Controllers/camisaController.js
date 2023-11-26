@@ -14,6 +14,7 @@ const listarCamisasPorMarca = async (req, res) => {
 
 const listarCamisasMaisVendidas = async (req, res) => {
   try {
+    console.log('Recebido pedido para listar camisas mais vendidas.');
     const camisas = await CamisaModel.listarCamisasMaisVendidas();
     res.json({ camisas });
   } catch (error) {
