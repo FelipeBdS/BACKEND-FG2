@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors')
 const clienteRoutes = require('./Routes/clienteRoutes')
 require('dotenv').config();
 const pedidoRoutes = require('./Routes/pedidoRoutes')
@@ -8,6 +9,7 @@ const itemPedidoRoutes = require('./Routes/item_pedidoRoutes')
 const camisasRoutes = require('./Routes/camisaRoutes')
 const marcasRoutes = require('./Routes/marcasRoutes')
 
+app.use(cors());
 
 app.use(express.json());
 
