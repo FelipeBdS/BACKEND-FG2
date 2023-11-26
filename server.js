@@ -20,8 +20,8 @@ app.get('/', (req, res) => {
 app.use('/api/cliente', clienteRoutes)
 app.use('/api/pedido', pedidoRoutes)
 app.use('./api/carrinho', carrinhoRoutes)
-app.use('./api/itemPedido', itemPedidoRoutes)
-app.use('./api/camisas', camisasRoutes)
+app.use('/api/itemPedido', itemPedidoRoutes)
+app.use('/api/camisas', camisasRoutes)
 app.use('/api/marcas', marcasRoutes)
 
 
