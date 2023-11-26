@@ -11,6 +11,10 @@ const marcasRoutes = require('./Routes/marcasRoutes')
 
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.send('Hello, world!');
+});
+
 app.use('/api/cliente', clienteRoutes)
 app.use('/api/pedido', pedidoRoutes)
 app.use('./api/carrinho', carrinhoRoutes)
