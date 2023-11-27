@@ -13,7 +13,7 @@ const listarCamisasPorMarca = async (marca_id) => {
 };
 
 const listarCamisasMaisVendidas = async () => {
-  const query = 'SELECT camisa_id, marca_id, descricao, tamanho, url_imagem1 preco FROM camisas WHERE quantidade_vendida > 100';
+  const query = 'SELECT camisa_id, marca_id, descricao, tamanho, url_imagem1, preco FROM camisas WHERE quantidade_vendida > 100';
   try {
     const result = await dbConnect.query(query);
     return result.rows;
