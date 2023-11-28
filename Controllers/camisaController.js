@@ -23,6 +23,10 @@ const listarCamisasMaisVendidas = async (req, res) => {
   }
 };
 
+
+
+
+
 module.exports = {
   listarCamisasPorMarca,
   listarCamisasMaisVendidas,

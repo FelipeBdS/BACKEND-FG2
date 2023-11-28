@@ -40,57 +40,40 @@ const loginCliente = async (req, res) => {
 };
 
 
-const excluirCliente = async (req, res) => {
-  const { cliente_id } = req.params.ciente_id;
+
+const atualizarEndereco = async (req, res) => {
+  const { rua, numero_casa, bairro, cidade, estado, nome_usuario } = req.body;
 
   try {
-    const cliente = await ClienteModel.credenciaisCliente({ cliente_id });
-
-    if (!cliente) {
-      return res.status(404).json({ success: false, message: 'Cliente não encontrado.' });
-    }
-
-    const resultadoExclusao = await ClienteModel.excluirCliente(cliente);
-
-    if (resultadoExclusao.success) {
-      return res.status(200).json({ success: true, message: resultadoExclusao.message });
-    } else {
-      return res.status(500).json({ success: false, message: resultadoExclusao.message });
-    }
+    const response = await ClienteModel.atualizarEndereco(rua, numero_casa, bairro, cidade, estado, nome_usuario);
+    res.status(200).json(response);
   } catch (error) {
-    console.error('Erro ao excluir cliente:', error.message);
-    res.status(500).json({ success: false, message: 'Erro ao excluir cliente.' });
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao atualizar endereço.' });
   }
 };
 
-const atualizarInformacoesCliente = async (req, res) => {
-  const { cliente_id } = req.params;
-  const novasInformacoes = req.body;
+const excluirUsuario = async (req, res) => {
+  const { nome_usuario } = req.body;
 
   try {
-    const resultadoAtualizacao = await ClienteModel.atualizarInformacoesCliente(
-      cliente_id,
-      novasInformacoes
-    );
-
-    if (resultadoAtualizacao.success) {
-      return res.status(200).json({ success: true, message: resultadoAtualizacao.message });
-    } else {
-      return res.status(404).json({ success: false, message: resultadoAtualizacao.message });
-    }
+    const result = await ClienteModel.excluirConta(nome_usuario);
+    res.status(200).json(result);
   } catch (error) {
-    console.error('Erro ao atualizar informações do cliente:', error.message);
-    res.status(500).json({ success: false, message: 'Erro interno do servidor.' });
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao excluir usuário.' });
   }
 };
+
 
 
 module.exports = {
   cadastrarNovoUsuario,
   loginCliente,
-  excluirCliente,
-  atualizarInformacoesCliente
-  
+  logoutCliente,
+  atualizarEndereco,
+  excluirUsuario
+
 }
 
 

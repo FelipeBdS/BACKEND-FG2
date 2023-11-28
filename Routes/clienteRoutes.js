@@ -7,9 +7,11 @@ const ClienteController = require('../Controllers/clienteController');
 router.post('/cadastrarCliente', ClienteController.cadastrarNovoUsuario);
 // Rota para fazer login
 router.post('/loginCliente', ClienteController.loginCliente);
-// Rota para excluir conta
-router.delete('/excluirConta', ClienteController.excluirCliente);
-// Rota para atualizar endereço
-router.put('/atualizarEndereço/:cliente_id', ClienteController)
+
+router.delete('/excluirConta', ClienteController.excluirUsuario);
+
+router.put('/atualizarEndereco', ClienteController.atualizarEndereco);
+
+
 
 module.exports = router;

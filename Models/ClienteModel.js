@@ -68,67 +68,11 @@ const credenciaisCliente = async (cliente) => {
   }
 };
 
-const excluirCliente = async(cliente) => {
-  const query = "DELETE FROM cliente WHERE cliente_id = $1";
-  const values = [cliente.cliente_id]
-
-  try {
-    const result = await dbConnect.query(query, values);
-    if (result.rowCount > 0) {
-      return { success: true, message: 'Cliente excluído com sucesso.' };
-    } else {
-      
-      return { success: false, message: 'Cliente não encontrado.' };
-    }
-  } catch (error) {
-    
-    console.error('Erro ao excluir cliente:', error.message);
-    return { success: false, message: 'Erro ao excluir cliente.' };
-  }
-};
-
-const atualizarInformacoesCliente = async (cliente_id, novasInformacoes) => {
-  const {
-    rua,
-    numero_casa,
-    bairro,
-    cidade,
-    estado,
-  } = novasInformacoes;
-
-  const query =
-    'UPDATE cliente SET rua = $1, numero_casa = $2, bairro = $3, cidade = $4, estado = $5 WHERE cliente_id = $6';
-  const values = [
-    rua,
-    numero_casa,
-    bairro,
-    cidade,
-    estado,
-    cliente_id
-  ];
-
-  try {
-    const result = await dbConnect.query(query, values);
-
-    if (result.rowCount > 0) {
-      return { success: true, message: 'Informações do cliente atualizadas com sucesso.' };
-    } else {
-      return { success: false, message: 'Cliente não encontrado.' };
-    }
-  } catch (error) {
-    console.error('Erro ao atualizar informações do cliente:', error.message);
-    return { success: false, message: 'Erro ao atualizar informações do cliente.' };
-  }
-};
-
-
 module.exports = {
   nomeUsuarioJaExiste,
   cadastrarCliente,
   loginCliente,
-  credenciaisCliente,
-  excluirCliente,
-  atualizarInformacoesCliente
+  credenciaisCliente
 };
 
 
