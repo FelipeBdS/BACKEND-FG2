@@ -40,23 +40,57 @@ const loginCliente = async (req, res) => {
 };
 
 
-const logoutCliente = (req, res) => {
-  // Limpar dados de sessão
-  req.session.destroy((err) => {
-    if (err) {
-      console.error('Erro ao fazer logout:', err);
-      res.status(500).json({ error: 'Erro interno do servidor' });
-    } else {
-      res.json({ mensagem: 'Logout bem-sucedido' });
+const excluirCliente = async (req, res) => {
+  const { cliente_id } = req.params.ciente_id;
+
+  try {
+    const cliente = await ClienteModel.credenciaisCliente({ cliente_id });
+
+    if (!cliente) {
+      return res.status(404).json({ success: false, message: 'Cliente não encontrado.' });
     }
-  });
+
+    const resultadoExclusao = await ClienteModel.excluirCliente(cliente);
+
+    if (resultadoExclusao.success) {
+      return res.status(200).json({ success: true, message: resultadoExclusao.message });
+    } else {
+      return res.status(500).json({ success: false, message: resultadoExclusao.message });
+    }
+  } catch (error) {
+    console.error('Erro ao excluir cliente:', error.message);
+    res.status(500).json({ success: false, message: 'Erro ao excluir cliente.' });
+  }
+};
+
+const atualizarInformacoesCliente = async (req, res) => {
+  const { cliente_id } = req.params;
+  const novasInformacoes = req.body;
+
+  try {
+    const resultadoAtualizacao = await ClienteModel.atualizarInformacoesCliente(
+      cliente_id,
+      novasInformacoes
+    );
+
+    if (resultadoAtualizacao.success) {
+      return res.status(200).json({ success: true, message: resultadoAtualizacao.message });
+    } else {
+      return res.status(404).json({ success: false, message: resultadoAtualizacao.message });
+    }
+  } catch (error) {
+    console.error('Erro ao atualizar informações do cliente:', error.message);
+    res.status(500).json({ success: false, message: 'Erro interno do servidor.' });
+  }
 };
 
 
 module.exports = {
   cadastrarNovoUsuario,
   loginCliente,
-  logoutCliente
+  excluirCliente,
+  atualizarInformacoesCliente
+  
 }
 
 
