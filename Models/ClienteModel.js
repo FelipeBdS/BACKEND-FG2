@@ -70,10 +70,10 @@ const credenciaisCliente = async (cliente) => {
 };
 
 const obterUltimoCliente = async () => {
-  const query = 'SELECT * FROM cliente ORDER BY id DESC LIMIT 1';
+
   
   try {
-    const result = await dbConnect.query(query);
+    const result = await dbConnect.query('SELECT * FROM cliente ORDER BY id DESC LIMIT 1');
 
     if (result.rows.length === 0) {
       return null; // Nenhum cliente encontrado
