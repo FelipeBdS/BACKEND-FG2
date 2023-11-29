@@ -70,7 +70,7 @@ const credenciaisCliente = async (cliente) => {
 };
 
 const obterUltimoCliente = async (cliente) => {
-  const query = 'SELECT * FROM cliente ORDER BY id DESC LIMIT 1';
+  const query = 'SELECT * FROM cliente ORDER BY cliente_id DESC LIMIT 1';
   const values = [cliente]
   try {
     const result = await dbConnect.query(query, values);
