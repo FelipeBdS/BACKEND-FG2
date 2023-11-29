@@ -69,7 +69,7 @@ const credenciaisCliente = async (cliente) => {
   }
 };
 
-const atualizarEndereco = async (nome_usuario, rua, numero_casa, bairro, cidade, estado) => {
+const atualizarEndereco = async (rua, numero_casa, bairro, cidade, estado, nome_usuario) => {
   const query = 'UPDATE cliente SET rua = $1, numero_casa = $2, bairro = $3, cidade = $4, estado = $5 WHERE nome_usuario = $6 RETURNING nome_usuario, rua';
   const values = [rua, numero_casa, bairro, cidade, estado, nome_usuario];
 
