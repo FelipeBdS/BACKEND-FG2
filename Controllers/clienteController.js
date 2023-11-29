@@ -42,10 +42,10 @@ const loginCliente = async (req, res) => {
 
 
 const atualizarEnderecoController = async (req, res) => {
-  const { rua, bairro, numero_casa, cidade, estado, nome_usuario } = req.body;
+  const { nome_usuario, rua, bairro, numero_casa, cidade, estado } = req.body;
 
   try {
-    const response = await ClienteModel.atualizarEndereco(rua, numero_casa, bairro, cidade, estado, nome_usuario);
+    const response = await ClienteModel.atualizarEndereco(nome_usuario, rua, numero_casa, bairro, cidade, estado);
     res.status(200).json(response);
   } catch (error) {
     console.error(error);
