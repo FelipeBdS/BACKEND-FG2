@@ -70,7 +70,6 @@ const excluirUsuario = async (req, res) => {
 module.exports = {
   cadastrarNovoUsuario,
   loginCliente,
-  logoutCliente,
   atualizarEndereco,
   excluirUsuario
 
