@@ -74,7 +74,9 @@ const obterUltimoClienteController = async (req, res) => {
 
 const excluirClienteController = async (req, res) => {
   const { nome_usuario } = req.body;
-
+  if (!nome_usuario) {
+    return res.status(400).json({ mensagem: 'O campo nome_usuario é obrigatório.' });
+  }
   try {
     const resultadoExclusao = await ClienteModel.excluirCliente(nome_usuario);
 
