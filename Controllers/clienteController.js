@@ -65,13 +65,28 @@ const excluirUsuario = async (req, res) => {
   }
 };
 
+const obterUltimoCliente = async (req, res) => {
+  try {
+    const ultimoCliente = await ClienteModel.obterUltimoCliente();
 
+    if (!ultimoCliente) {
+      return res.status(404).json({ mensagem: 'Nenhum cliente encontrado.' });
+    }
+
+    const { nome, nome_usuario, rua, numero_casa, bairro, cidade, estado } = ultimoCliente;
+    res.json({nome, nome_usuario, rua, numero_casa, bairro, cidade, estado});
+  } catch (error) {
+    console.error('Erro ao obter o último cliente', error);
+    res.status(500).json({ mensagem: 'Erro interno do servidor.' });
+  }
+};
 
 module.exports = {
   cadastrarNovoUsuario,
   loginCliente,
   atualizarEndereco,
-  excluirUsuario
+  excluirUsuario,
+  obterUltimoCliente
 
 }
 

@@ -69,13 +69,30 @@ const credenciaisCliente = async (cliente) => {
   }
 };
 
+const obterUltimoCliente = async () => {
+  const query = 'SELECT * FROM clientes ORDER BY id DESC LIMIT 1';
+  
+  try {
+    const result = await dbConnect.query(query);
+
+    if (result.rows.length === 0) {
+      return null; // Nenhum cliente encontrado
+    }
+
+    return result.rows[0];
+  } catch (error) {
+    console.error('Erro ao obter o último cliente', error);
+    throw error;
+  }
+};
 
 
 module.exports = {
   nomeUsuarioJaExiste,
   cadastrarCliente,
   loginCliente,
-  credenciaisCliente
+  credenciaisCliente,
+  obterUltimoCliente
 };
 
 
