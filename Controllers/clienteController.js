@@ -65,7 +65,7 @@ const excluirUsuario = async (req, res) => {
   }
 };
 
-const obterUltimoCliente = async (req, res) => {
+const obterUltimoClienteController = async (req, res) => {
   try {
     const ultimoCliente = await ClienteModel.obterUltimoCliente();
 
@@ -86,7 +86,7 @@ module.exports = {
   loginCliente,
   atualizarEndereco,
   excluirUsuario,
-  obterUltimoCliente
+  obterUltimoClienteController
 
 }
 
