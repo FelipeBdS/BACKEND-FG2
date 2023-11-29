@@ -42,7 +42,7 @@ const loginCliente = async (req, res) => {
 
 
 const atualizarEnderecoController = async (req, res) => {
-  const { rua, numero_casa, bairro, cidade, estado, nome_usuario } = req.body;
+  const { rua, bairro, numero_casa, cidade, estado, nome_usuario } = req.body;
 
   try {
     const response = await ClienteModel.atualizarEndereco(rua, numero_casa, bairro, cidade, estado, nome_usuario);
