@@ -69,11 +69,11 @@ const credenciaisCliente = async (cliente) => {
   }
 };
 
-const obterUltimoCliente = async () => {
-
-  
+const obterUltimoCliente = async (cliente) => {
+  const query = 'SELECT * FROM cliente ORDER BY id DESC LIMIT 1';
+  const values = [cliente]
   try {
-    const result = await dbConnect.query('SELECT * FROM cliente ORDER BY id DESC LIMIT 1');
+    const result = await dbConnect.query(query, values);
 
     if (result.rows.length === 0) {
       return null; // Nenhum cliente encontrado
