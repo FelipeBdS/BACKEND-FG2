@@ -12,6 +12,6 @@ router.delete('/excluirConta', ClienteController.excluirUsuario);
 
 router.put('/atualizarEndereco', ClienteController.atualizarEndereco);
 
-router.get('/userInfo', ClienteController.obterUltimoCliente)
+router.get('/userInfo', ClienteController.obterUltimoClienteController)
 
 module.exports = router;
