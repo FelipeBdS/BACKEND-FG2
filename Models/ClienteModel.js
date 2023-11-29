@@ -33,6 +33,7 @@ const cadastrarCliente = async (cliente) => {
     const result = await dbConnect.query(query, values);
     return result.rows[0];
   } catch (error) {
+    console.error('Erro ao autenticar cliente:', error.message);
     throw new Error ('erro ao cadastrar cliente');
   };
 
