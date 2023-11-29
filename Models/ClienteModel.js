@@ -68,6 +68,8 @@ const credenciaisCliente = async (cliente) => {
   }
 };
 
+
+
 module.exports = {
   nomeUsuarioJaExiste,
   cadastrarCliente,
