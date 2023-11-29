@@ -69,7 +69,7 @@ const credenciaisCliente = async (cliente) => {
   }
 };
 
-const atualizarEndereco = async (nome_usuario, rua, numero_casa, bairro, cidade, estado) => {
+const atualizarEndereco = async ( rua, numero_casa, bairro, cidade, estado, nome_usuario) => {
   const query = 'UPDATE cliente SET rua = $1, numero_casa = $2, bairro = $3, cidade = $4, estado = $5 WHERE nome_usuario = $6';
   const values = [rua, numero_casa, bairro, cidade, estado, nome_usuario];
 
@@ -77,7 +77,7 @@ const atualizarEndereco = async (nome_usuario, rua, numero_casa, bairro, cidade,
     const result = await dbConnect.query(query, values);
     const linhasAfetadas = result.rowCount;
 
-    if (true) {
+    if (linhasAfetadas === 0) {
       console.log(`Cliente com nome de usuário ${nome_usuario} atualizado com sucesso. ${linhasAfetadas} linha(s) afetada(s).`);
       return { sucesso: true, mensagem: `Cliente atualizado com sucesso. ${linhasAfetadas} linha(s) afetada(s).` };
     } else {
