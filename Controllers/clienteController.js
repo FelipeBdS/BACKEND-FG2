@@ -41,7 +41,7 @@ const loginCliente = async (req, res) => {
 
 
 
-const atualizarEndereco = async (req, res) => {
+const atualizarEnderecoController = async (req, res) => {
   const { rua, numero_casa, bairro, cidade, estado, nome_usuario } = req.body;
 
   try {
@@ -53,17 +53,7 @@ const atualizarEndereco = async (req, res) => {
   }
 };
 
-const excluirUsuario = async (req, res) => {
-  const { nome_usuario } = req.body;
 
-  try {
-    const result = await ClienteModel.excluirConta(nome_usuario);
-    res.status(200).json(result);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Erro ao excluir usuário.' });
-  }
-};
 
 const obterUltimoClienteController = async (req, res) => {
   try {
@@ -81,12 +71,30 @@ const obterUltimoClienteController = async (req, res) => {
   }
 };
 
+
+const excluirClienteController = async (req, res) => {
+  const { nome_usuario } = req.body;
+
+  try {
+    const resultadoExclusao = await ClienteModel.excluirCliente(nome_usuario);
+
+    if (resultadoExclusao.sucesso) {
+      return res.status(200).json({ mensagem: resultadoExclusao.mensagem });
+    } else {
+      return res.status(404).json({ mensagem: resultadoExclusao.mensagem });
+    }
+  } catch (error) {
+    console.error('Erro no controlador ao excluir cliente', error);
+    return res.status(500).json({ mensagem: 'Erro interno do servidor ao excluir cliente.' });
+  }
+};
+
 module.exports = {
   cadastrarNovoUsuario,
   loginCliente,
-  atualizarEndereco,
-  excluirUsuario,
-  obterUltimoClienteController
+  atualizarEnderecoController,
+  obterUltimoClienteController,
+  excluirClienteController
 
 }
 

@@ -8,10 +8,11 @@ router.post('/cadastrarCliente', ClienteController.cadastrarNovoUsuario);
 // Rota para fazer login
 router.post('/loginCliente', ClienteController.loginCliente);
 
-router.delete('/excluirConta', ClienteController.excluirUsuario);
+router.delete('/excluirConta', ClienteController.excluirClienteController);
 
-router.put('/atualizarEndereco', ClienteController.atualizarEndereco);
+router.put('/atualizarEndereco', ClienteController.atualizarEnderecoController);
 
 router.get('/userInfo', ClienteController.obterUltimoClienteController)
+
 
 module.exports = router;
