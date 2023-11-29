@@ -69,17 +69,17 @@ const credenciaisCliente = async (cliente) => {
   }
 };
 
-const atualizarEndereco = async ( rua, numero_casa, bairro, cidade, estado, nome_usuario) => {
-  const query = 'UPDATE cliente SET rua = $1, numero_casa = $2, bairro = $3, cidade = $4, estado = $5 WHERE nome_usuario = $6';
+const atualizarEndereco = async (nome_usuario, rua, numero_casa, bairro, cidade, estado) => {
+  const query = 'UPDATE cliente SET rua = $1, numero_casa = $2, bairro = $3, cidade = $4, estado = $5 WHERE nome_usuario = $6 RETURNING nome_usuario, rua';
   const values = [rua, numero_casa, bairro, cidade, estado, nome_usuario];
 
   try {
     const result = await dbConnect.query(query, values);
-    const linhasAfetadas = result.rowCount;
+    const clienteAtualizado = result.rows[0];
 
-    if (linhasAfetadas === 0) {
-      console.log(`Cliente com nome de usuário ${nome_usuario} atualizado com sucesso. ${linhasAfetadas} linha(s) afetada(s).`);
-      return { sucesso: true, mensagem: `Cliente atualizado com sucesso. ${linhasAfetadas} linha(s) afetada(s).` };
+    if (clienteAtualizado) {
+      console.log(`Cliente com nome de usuário ${nome_usuario} atualizado com sucesso.`);
+      return { sucesso: true, mensagem: `Cliente atualizado com sucesso.`, cliente: clienteAtualizado };
     } else {
       console.log(`Nenhum cliente encontrado com nome de usuário ${nome_usuario}.`);
       return { sucesso: false, mensagem: `Nenhum cliente encontrado com nome de usuário ${nome_usuario}.` };
