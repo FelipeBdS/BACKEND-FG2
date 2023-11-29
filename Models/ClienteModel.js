@@ -69,6 +69,27 @@ const credenciaisCliente = async (cliente) => {
   }
 };
 
+const atualizarEndereco = async (nome_usuario, rua, numero_casa, bairro, cidade, estado) => {
+  const query = 'UPDATE cliente SET rua = $1, numero_casa = $2, bairro = $3, cidade = $4, estado = $5 WHERE nome_usuario = $6';
+  const values = [rua, numero_casa, bairro, cidade, estado, nome_usuario];
+
+  try {
+    const result = await dbConnect.query(query, values);
+    const linhasAfetadas = result.rowCount;
+
+    if (linhasAfetadas > 0) {
+      console.log(`Cliente com nome de usuário ${nome_usuario} atualizado com sucesso. ${linhasAfetadas} linha(s) afetada(s).`);
+      return { sucesso: true, mensagem: `Cliente atualizado com sucesso. ${linhasAfetadas} linha(s) afetada(s).` };
+    } else {
+      console.log(`Nenhum cliente encontrado com nome de usuário ${nome_usuario}.`);
+      return { sucesso: false, mensagem: `Nenhum cliente encontrado com nome de usuário ${nome_usuario}.` };
+    }
+  } catch (error) {
+    console.error('Erro ao atualizar cliente', error);
+    return { sucesso: false, mensagem: 'Erro ao atualizar cliente.' };
+  }
+};
+
 const obterUltimoCliente = async () => {
   const query = 'SELECT * FROM cliente ORDER BY cliente_id DESC LIMIT 1';
   try {
@@ -106,7 +127,8 @@ module.exports = {
   loginCliente,
   credenciaisCliente,
   obterUltimoCliente,
-  excluirCliente
+  excluirCliente,
+  atualizarEndereco
 };
 
 
