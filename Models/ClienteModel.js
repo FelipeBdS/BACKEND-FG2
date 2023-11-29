@@ -75,7 +75,7 @@ const atualizarEndereco = async (nome_usuario, rua, numero_casa, bairro, cidade,
 
   try {
     const result = await dbConnect.query(query, values);
-    const linhasAfetadas = result.rows[0];
+    const linhasAfetadas = result.rowCount;
 
     if (linhasAfetadas > 0) {
       console.log(`Cliente com nome de usuário ${nome_usuario} atualizado com sucesso. ${linhasAfetadas} linha(s) afetada(s).`);
