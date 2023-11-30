@@ -107,9 +107,11 @@ const obterUltimoCliente = async () => {
 };
 
 const excluirCliente = async (nome_usuario) => {
+  console.log('Recebendo solicitação para excluir cliente:', nome_usuario);
+
   const query = 'DELETE FROM cliente WHERE nome_usuario = $1';
   const values = [nome_usuario];
-  
+
   try {
     await dbConnect.query(query, values);
     console.log(`Cliente com nome de usuário ${nome_usuario} excluído com sucesso.`);
@@ -119,7 +121,6 @@ const excluirCliente = async (nome_usuario) => {
     return { sucesso: false, mensagem: 'Erro ao excluir cliente.' };
   }
 };
-
 
 module.exports = {
   nomeUsuarioJaExiste,
