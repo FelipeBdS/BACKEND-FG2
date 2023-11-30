@@ -73,8 +73,7 @@ const obterUltimoClienteController = async (req, res) => {
 
 
 const excluirClienteController = async (req, res) => {
-  console.log('Rota DELETE /api/cliente/excluirConta alcançada.');
-  const { nome_usuario } = req.body;
+  const { nome_usuario } = req.params;
 
   try {
     const resultadoExclusao = await ClienteModel.excluirCliente(nome_usuario);
